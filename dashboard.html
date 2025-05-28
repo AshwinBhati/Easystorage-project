@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        },
+                        success: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        },
+                        danger: {
+                            50: '#fef2f2',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .action-button {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <button id="userMenuBtn" class="text-gray-700 focus:outline-none">
+                    <i class="fas fa-user text-xl"></i>
+                </button>
+                
+                <div class="flex items-center">
+                    <img src="easystorage-logo.svg" alt="EasyStorage Logo" class="h-8">
+                </div>
+                
+                <button class="text-gray-700 focus:outline-none relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sidebar Overlay -->
+    <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-20"></div>
+    
+    <!-- Sidebar Menu -->
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-30">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-lg font-semibold text-gray-800">Menu</h2>
+            <button id="closeSidebarBtn" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="mt-4">
+            <ul>
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-user-circle mr-3 w-5 text-center"></i>
+                        <span>Account</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-history mr-3 w-5 text-center"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-cog mr-3 w-5 text-center"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="border-t mt-4 pt-2">
+                    <a href="index.html" class="flex items-center px-6 py-3 text-red-600 hover:bg-red-50">
+                        <i class="fas fa-sign-out-alt mr-3 w-5 text-center"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+            <div class="flex items-center">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+                <div>
+                    <p class="text-sm font-medium text-gray-800">John Farmer</p>
+                    <p class="text-xs text-gray-500">Premium Account</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">Welcome to EasyStorage</h1>
+            <p class="text-gray-600 max-w-lg mx-auto">Manage your farm storage and logistics efficiently with our platform. What would you like to do today?</p>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10">
+            <a href="store-products.html" class="action-button bg-success-600 hover:bg-success-700 text-white text-lg font-medium py-6 px-8 rounded-xl w-full md:w-64 flex flex-col items-center justify-center">
+                <i class="fas fa-warehouse text-3xl mb-3"></i>
+                <span>Want to Store</span>
+                <p class="text-success-50 text-sm mt-2">Store your farm produce</p>
+            </a>
+            
+            <a href="stored-goods-history.html" class="action-button bg-danger-600 hover:bg-danger-700 text-white text-lg font-medium py-6 px-8 rounded-xl w-full md:w-64 flex flex-col items-center justify-center">
+                <i class="fas fa-truck-loading text-3xl mb-3"></i>
+                <span>Want to Restore</span>
+                <p class="text-danger-50 text-sm mt-2">Retrieve your stored items</p>
+            </a>
+        </div>
+        
+        <!-- Additional Content -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold text-gray-800">Storage Status</h3>
+                    <i class="fas fa-box text-primary-600"></i>
+                </div>
+                <p class="text-gray-600 mb-3">Current storage usage:</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-primary-600 h-2.5 rounded-full" style="width: 65%"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">65% of your storage space used</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold text-gray-800">Recent Activity</h3>
+                    <i class="fas fa-chart-line text-secondary-500"></i>
+                </div>
+                <ul class="space-y-3">
+                    <li class="text-sm text-gray-600 flex items-center">
+                        <i class="fas fa-arrow-down text-success-500 mr-2"></i>
+                        <span>Stored 2 tons of wheat</span>
+                        <span class="ml-auto text-xs text-gray-400">2d ago</span>
+                    </li>
+                    <li class="text-sm text-gray-600 flex items-center">
+                        <i class="fas fa-arrow-up text-danger-500 mr-2"></i>
+                        <span>Retrieved 1 ton of corn</span>
+                        <span class="ml-auto text-xs text-gray-400">5d ago</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold text-gray-800">Market Prices</h3>
+                    <i class="fas fa-tag text-accent-500"></i>
+                </div>
+                <ul class="space-y-3">
+                    <li class="text-sm text-gray-600 flex items-center justify-between">
+                        <span>Wheat</span>
+                        <span class="font-medium">$320/ton</span>
+                        <span class="text-success-500 text-xs">+2.4%</span>
+                    </li>
+                    <li class="text-sm text-gray-600 flex items-center justify-between">
+                        <span>Corn</span>
+                        <span class="font-medium">$180/ton</span>
+                        <span class="text-danger-500 text-xs">-1.2%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Sidebar Toggle
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        
+        userMenuBtn.addEventListener('click', function() {
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+        
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+        
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+    </script>
+</body>
+</html> 

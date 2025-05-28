@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage - Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        },
+                        success: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'input': '0 1px 2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .user-type-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .user-type-btn.active {
+            font-weight: 500;
+        }
+        
+        .user-type-btn:not(.active):hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <div class="flex-1 flex flex-col items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white rounded-xl shadow-soft p-8 border border-gray-100">
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <svg class="h-12" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+                    <text x="250" y="60" font-family="Arial, sans-serif" font-size="42" font-weight="bold" text-anchor="middle" fill="#004D40">Easy<tspan fill="#FF6F00">storage</tspan></text>
+                </svg>
+            </div>
+            
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-8">Create Account</h1>
+            
+            <form class="space-y-5">
+                <!-- Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="name">
+                        Full Name
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-input focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+                
+                <!-- Email -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="email">
+                        Email Address
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-input focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="your@email.com"
+                        required
+                    >
+                </div>
+                
+                <!-- Phone -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="phone">
+                        Phone Number
+                    </label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-input focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="(123) 456-7890"
+                    >
+                </div>
+                
+                <!-- Password -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="password">
+                        Password
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-input focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Create a strong password"
+                        required
+                    >
+                </div>
+                
+                <!-- Confirm Password -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1" for="confirm-password">
+                        Confirm Password
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirm-password" 
+                        name="confirm-password" 
+                        class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg shadow-input focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="Confirm your password"
+                        required
+                    >
+                </div>
+                
+                <!-- User Type -->
+                <div class="pt-2">
+                    <p class="block text-sm font-medium text-gray-700 mb-3">
+                        I am a:
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button 
+                            type="button" 
+                            id="warehouse-btn" 
+                            class="user-type-btn bg-primary-100 text-primary-800 border border-primary-200 px-4 py-3 rounded-lg text-center hover:bg-primary-200"
+                        >
+                            <i class="fas fa-warehouse mr-2"></i>
+                            Warehouse Owner
+                        </button>
+                        
+                        <button 
+                            type="button" 
+                            id="farmer-btn" 
+                            class="user-type-btn bg-success-100 text-success-600 border border-success-200 px-4 py-3 rounded-lg text-center hover:bg-success-200 active"
+                        >
+                            <i class="fas fa-tractor mr-2"></i>
+                            Farmer
+                        </button>
+                    </div>
+                    <input type="hidden" name="user-type" id="user-type" value="farmer">
+                </div>
+                
+                <!-- Terms -->
+                <div class="flex items-center">
+                    <input 
+                        type="checkbox" 
+                        id="terms" 
+                        name="terms" 
+                        class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                        required
+                    >
+                    <label for="terms" class="ml-2 block text-sm text-gray-700">
+                        I agree to the <a href="#" class="text-primary-600 hover:text-primary-700">Terms of Service</a> and <a href="#" class="text-primary-600 hover:text-primary-700">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button 
+                        type="submit" 
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+                    >
+                        Create Account
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Login Link -->
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Already have an account? <a href="index.html" class="text-primary-600 hover:text-primary-700 font-medium">login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle user type selection
+        const warehouseBtn = document.getElementById('warehouse-btn');
+        const farmerBtn = document.getElementById('farmer-btn');
+        const userTypeInput = document.getElementById('user-type');
+        
+        warehouseBtn.addEventListener('click', () => {
+            warehouseBtn.classList.add('active');
+            farmerBtn.classList.remove('active');
+            userTypeInput.value = 'warehouse';
+        });
+        
+        farmerBtn.addEventListener('click', () => {
+            farmerBtn.classList.add('active');
+            warehouseBtn.classList.remove('active');
+            userTypeInput.value = 'farmer';
+        });
+        
+        // Simple form validation
+        const form = document.querySelector('form');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm-password');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (password.value !== confirmPassword.value) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // In a real app, this would submit the form data to a server
+            alert('Account created successfully! Redirecting to login...');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html> 

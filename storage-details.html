@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage - Storage Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        },
+                        success: {
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        },
+                        yellow: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'medium': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:hover {
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+        
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Custom date input styling to make it consistent across browsers */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background-color: transparent;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="store-products.html" class="text-gray-700 focus:outline-none flex items-center">
+                    <i class="fas fa-arrow-left text-xl mr-2"></i>
+                    <span class="text-gray-700 hidden sm:inline">Back</span>
+                </a>
+                
+                <h1 class="text-xl font-semibold text-gray-800">Storage Details</h1>
+                
+                <button class="text-gray-700 focus:outline-none relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Selected Product Summary -->
+            <div class="mb-8 bg-white rounded-xl shadow-soft p-6">
+                <div class="flex items-center">
+                    <div class="mr-4 bg-green-50 w-16 h-16 rounded-full flex items-center justify-center">
+                        <span class="text-4xl">🍎</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Apple</h2>
+                        <p class="text-gray-600">Selected for storage</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Storage Form -->
+            <div class="bg-white rounded-xl shadow-medium p-6 mb-8">
+                <h2 class="text-lg font-semibold text-gray-800 mb-6">Enter Storage Details</h2>
+                
+                <form class="space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:space-x-4">
+                        <div class="relative flex-1 mb-4 md:mb-0">
+                            <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+                            <div class="relative">
+                                <input 
+                                    type="number" 
+                                    id="amount" 
+                                    placeholder="Amount in kg" 
+                                    min="1"
+                                    class="form-input w-full pl-4 pr-10 py-3 bg-yellow-50 border border-yellow-200 rounded-lg focus:outline-none focus:border-primary-500"
+                                >
+                                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                    <span>kg</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex-1">
+                            <label for="pickupDate" class="block text-sm font-medium text-gray-700 mb-1">Pickup Date</label>
+                            <div class="relative">
+                                <input 
+                                    type="date" 
+                                    id="pickupDate" 
+                                    placeholder="Date for pickup" 
+                                    class="form-input w-full pl-4 pr-10 py-3 bg-yellow-50 border border-yellow-200 rounded-lg focus:outline-none focus:border-primary-500"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Options Section -->
+                    <div class="border-t border-gray-100 pt-6">
+                        <h3 class="text-md font-medium text-gray-800 mb-4">Additional Options</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input id="premium-storage" name="storage-type" type="radio" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="premium-storage" class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-700">Premium Storage (+$5/month)</span>
+                                    <span class="block text-xs text-gray-500">Climate controlled environment</span>
+                                </label>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input id="standard-storage" name="storage-type" type="radio" checked class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300">
+                                <label for="standard-storage" class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-700">Standard Storage</span>
+                                    <span class="block text-xs text-gray-500">Regular warehouse conditions</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Delivery Information Section -->
+                    <div class="border-t border-gray-100 pt-6">
+                        <h3 class="text-md font-medium text-gray-800 mb-4">Pickup Location</h3>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-map-marker-alt text-secondary-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-800">John's Farm</p>
+                                    <p class="text-xs text-gray-500">123 Rural Route, Farmington, CA 95230</p>
+                                </div>
+                                <button class="ml-auto text-primary-600 text-sm font-medium">
+                                    Change
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Cost Summary -->
+            <div class="bg-white rounded-xl shadow-soft p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Storage Cost Summary</h3>
+                
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Base storage fee</span>
+                        <span class="text-gray-800">$25.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Weight-based fee (est.)</span>
+                        <span class="text-gray-800">$10.00</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Pickup service</span>
+                        <span class="text-gray-800">$5.00</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 pt-4">
+                    <div class="flex justify-between font-semibold">
+                        <span class="text-gray-800">Estimated Total</span>
+                        <span class="text-accent-500">$40.00</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Final cost may vary based on actual weight and storage duration</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Action Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-md border-t border-gray-200 py-4 px-4">
+        <div class="container mx-auto max-w-2xl">
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button class="order-2 sm:order-1 sm:flex-1 border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg hover:bg-gray-50">
+                    Save for Later
+                </button>
+                <a href="warehouse-list.html" class="order-1 sm:order-2 sm:flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center space-x-2">
+                    <span>Confirm Storage</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const dateInput = document.getElementById('pickupDate');
+        dateInput.valueAsDate = tomorrow;
+        
+        // Update cost estimate when amount changes
+        const amountInput = document.getElementById('amount');
+        amountInput.addEventListener('input', function() {
+            // In a real app, this would calculate the actual cost
+            const baseAmount = 25;
+            const weightAmount = this.value ? parseFloat(this.value) * 2 : 0;
+            const pickupFee = 5;
+            const total = baseAmount + weightAmount + pickupFee;
+            
+            document.querySelector('.text-accent-500').textContent = `$${total.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html> 

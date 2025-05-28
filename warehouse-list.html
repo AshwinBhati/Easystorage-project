@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage - Available Warehouses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 8px rgba(0, 0, 0, 0.05)',
+                        'card-hover': '0 8px 16px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .warehouse-card {
+            transition: all 0.3s ease;
+        }
+        
+        .warehouse-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--tw-shadow-card-hover);
+        }
+        
+        .star-rating .star {
+            display: inline-block;
+            color: #d1d5db; /* gray-300 */
+        }
+        
+        .star-rating .star.filled {
+            color: #fbbf24; /* amber-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="storage-details.html" class="text-gray-700 focus:outline-none flex items-center">
+                    <i class="fas fa-arrow-left text-xl mr-2"></i>
+                    <span class="text-gray-700 hidden sm:inline">Back</span>
+                </a>
+                
+                <h1 class="text-xl font-semibold text-gray-800">Available Warehouses</h1>
+                
+                <button class="text-gray-700 focus:outline-none relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Location Info -->
+            <div class="mb-6 bg-white rounded-xl shadow-sm p-4 flex items-center">
+                <div class="mr-3 text-secondary-500">
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-lg font-medium text-gray-800">Warehouses in Farmington, CA</h2>
+                    <p class="text-sm text-gray-500">5 locations available for your Apple storage</p>
+                </div>
+                <button class="ml-auto text-primary-600 text-sm font-medium hidden sm:block">
+                    Filter Options
+                </button>
+            </div>
+            
+            <!-- Warehouse Listings -->
+            <div class="space-y-4 mb-12">
+                <!-- Warehouse Card 1 -->
+                <div class="warehouse-card bg-white rounded-xl shadow-card border border-gray-100 p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">Cold Storage Warehouse #1</h3>
+                        <span class="text-sm font-medium text-white bg-primary-600 px-2 py-1 rounded-full">Featured</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <span class="text-gray-600">123 Agricultural Way, Farmington, CA 95230</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="text-gray-600">209-555-1234</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-temperature-low"></i>
+                            </div>
+                            <span class="text-gray-600">-2°C to 5°C (Apple optimal storage)</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <div class="star-rating">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star">☆</span>
+                                </div>
+                                <span class="text-xs text-gray-500 ml-1">4.2/5 (128 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                        <div>
+                            <span class="text-accent-500 font-semibold">$35/ton</span>
+                            <span class="text-gray-500 text-sm">/month</span>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                            Select Warehouse
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Warehouse Card 2 -->
+                <div class="warehouse-card bg-white rounded-xl shadow-card border border-gray-100 p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">Valley Cold Chain Services</h3>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <span class="text-gray-600">456 Orchard Road, Farmington, CA 95230</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="text-gray-600">209-555-6789</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-temperature-low"></i>
+                            </div>
+                            <span class="text-gray-600">-4°C to 8°C (Wide temperature range)</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <div class="star-rating">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star">☆</span>
+                                    <span class="star">☆</span>
+                                </div>
+                                <span class="text-xs text-gray-500 ml-1">3.5/5 (86 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                        <div>
+                            <span class="text-accent-500 font-semibold">$28/ton</span>
+                            <span class="text-gray-500 text-sm">/month</span>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                            Select Warehouse
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Warehouse Card 3 -->
+                <div class="warehouse-card bg-white rounded-xl shadow-card border border-gray-100 p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">Premium Produce Storage</h3>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <span class="text-gray-600">789 Harvest Lane, Farmington, CA 95230</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="text-gray-600">209-555-4321</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-temperature-low"></i>
+                            </div>
+                            <span class="text-gray-600">-1°C to 4°C (Premium controlled)</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <div class="star-rating">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                </div>
+                                <span class="text-xs text-gray-500 ml-1">4.8/5 (204 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                        <div>
+                            <span class="text-accent-500 font-semibold">$42/ton</span>
+                            <span class="text-gray-500 text-sm">/month</span>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                            Select Warehouse
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Warehouse Card 4 -->
+                <div class="warehouse-card bg-white rounded-xl shadow-card border border-gray-100 p-5">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">Farmington Storage Solutions</h3>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <span class="text-gray-600">210 Farmer's Avenue, Farmington, CA 95230</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="text-gray-600">209-555-8765</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-temperature-low"></i>
+                            </div>
+                            <span class="text-gray-600">0°C to 6°C (Standard range)</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-500 w-6 flex-shrink-0">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <div class="star-rating">
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star filled">★</span>
+                                    <span class="star half-filled">★</span>
+                                    <span class="star">☆</span>
+                                </div>
+                                <span class="text-xs text-gray-500 ml-1">3.9/5 (56 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                        <div>
+                            <span class="text-accent-500 font-semibold">$30/ton</span>
+                            <span class="text-gray-500 text-sm">/month</span>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                            Select Warehouse
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Bottom Button -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-md border-t border-gray-200 py-4 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <button class="w-full bg-white border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-lg hover:bg-gray-50 flex items-center justify-center">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>Choose Different City</span>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // In a real app, these would be functionality for selecting warehouses
+        const warehouseButtons = document.querySelectorAll('.bg-primary-600');
+        
+        warehouseButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // In a real app, this would store the selection and proceed to next step
+                alert('Warehouse selected! In a complete app, this would finalize your storage request.');
+            });
+        });
+    </script>
+</body>
+</html> 

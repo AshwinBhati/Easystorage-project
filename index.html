@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        }
+                    },
+                    boxShadow: {
+                        'custom': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .role-button {
+            transition: all 0.3s ease;
+        }
+        
+        .role-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .role-button.selected {
+            border-width: 2px;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex items-center justify-center p-4">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function LoginPage() {
+            const [formData, setFormData] = useState({
+                email: '',
+                password: ''
+            });
+            const [errors, setErrors] = useState({});
+            const [rememberMe, setRememberMe] = useState(false);
+            const [selectedRole, setSelectedRole] = useState(null);
+
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setFormData({
+                    ...formData,
+                    [name]: value
+                });
+                
+                // Clear error when user starts typing
+                if (errors[name]) {
+                    setErrors({
+                        ...errors,
+                        [name]: null
+                    });
+                }
+            };
+
+            const validateForm = () => {
+                const newErrors = {};
+                
+                if (!formData.email) {
+                    newErrors.email = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+                    newErrors.email = 'Email format is invalid';
+                }
+                
+                if (!formData.password) {
+                    newErrors.password = 'Password is required';
+                }
+                
+                if (!selectedRole) {
+                    newErrors.role = 'Please select your role';
+                }
+                
+                return newErrors;
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const formErrors = validateForm();
+                
+                if (Object.keys(formErrors).length === 0) {
+                    // Simulate login behavior
+                    console.log('Login submitted:', formData);
+                    console.log('Selected role:', selectedRole);
+                    
+                    // Redirect based on selected role
+                    if (selectedRole === 'farmer') {
+                        window.location.href = 'dashboard.html';
+                    } else if (selectedRole === 'warehouse') {
+                        window.location.href = 'warehouse-dashboard.html';
+                    }
+                } else {
+                    setErrors(formErrors);
+                }
+            };
+
+            const handleRoleSelect = (role) => {
+                setSelectedRole(role);
+                
+                // Clear role error if it exists
+                if (errors.role) {
+                    setErrors({
+                        ...errors,
+                        role: null
+                    });
+                }
+            };
+
+            return (
+                <div className="w-full max-w-md">
+                    <div className="bg-white rounded-xl shadow-custom p-8 border border-gray-100">
+                        <div className="flex flex-col items-center mb-8">
+                            {/* Logo */}
+                            <div className="w-56 mb-4">
+                                <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                                    {/* Background */}
+                                    <rect x="0" y="0" width="500" height="300" fill="#f8f8f8" rx="10" ry="10"/>
+                                    
+                                    {/* Farm field in background */}
+                                    <path d="M 0,240 L 500,240 L 500,280 L 0,280 Z" fill="#8BC34A" />
+                                    <path d="M 20,240 L 40,240 M 60,240 L 80,240 M 100,240 L 120,240 M 140,240 L 160,240 M 180,240 L 200,240 M 220,240 L 240,240 M 260,240 L 280,240 M 300,240 L 320,240 M 340,240 L 360,240 M 380,240 L 400,240 M 420,240 L 440,240 M 460,240 L 480,240" stroke="#5D8C3A" strokeWidth="2" />
+                                    
+                                    {/* Truck */}
+                                    <g transform="translate(80, 170) scale(0.9)">
+                                        {/* Truck Body */}
+                                        <rect x="40" y="20" width="120" height="60" fill="#2196F3" rx="5" ry="5" />
+                                        <rect x="160" y="40" width="40" height="40" fill="#1976D2" rx="2" ry="2" />
+                                        <rect x="10" y="40" width="30" height="20" fill="#1976D2" rx="3" ry="3" />
+                                        
+                                        {/* Truck Windows */}
+                                        <rect x="165" y="45" width="30" height="15" fill="#BBDEFB" rx="2" ry="2" />
+                                        <rect x="15" y="45" width="20" height="10" fill="#BBDEFB" rx="2" ry="2" />
+                                        
+                                        {/* Cargo Box */}
+                                        <rect x="50" y="-20" width="100" height="40" fill="#FFA000" stroke="#FF8F00" strokeWidth="2" rx="3" ry="3" />
+                                        <line x1="50" y1="0" x2="150" y2="0" stroke="#FF8F00" strokeWidth="2" />
+                                        <line x1="75" y1="-20" x2="75" y2="20" stroke="#FF8F00" strokeWidth="2" />
+                                        <line x1="100" y1="-20" x2="100" y2="20" stroke="#FF8F00" strokeWidth="2" />
+                                        <line x1="125" y1="-20" x2="125" y2="20" stroke="#FF8F00" strokeWidth="2" />
+                                        
+                                        {/* Wheels */}
+                                        <circle cx="50" cy="80" r="15" fill="#424242" />
+                                        <circle cx="50" cy="80" r="8" fill="#9E9E9E" />
+                                        <circle cx="150" cy="80" r="15" fill="#424242" />
+                                        <circle cx="150" cy="80" r="8" fill="#9E9E9E" />
+                                        <circle cx="180" cy="80" r="15" fill="#424242" />
+                                        <circle cx="180" cy="80" r="8" fill="#9E9E9E" />
+                                    </g>
+                                    
+                                    {/* Farming Elements */}
+                                    <g transform="translate(370, 200) scale(0.7)">
+                                        {/* Barn/Silo */}
+                                        <rect x="0" y="-40" width="40" height="40" fill="#D32F2F" />
+                                        <polygon points="0,-40 20,-60 40,-40" fill="#B71C1C" />
+                                        <rect x="15" y="-30" width="10" height="15" fill="#FFFFFF" />
+                                        <circle cx="60" cy="-20" r="12" fill="#E0E0E0" stroke="#BDBDBD" strokeWidth="2" />
+                                        <rect x="54" y="-8" width="12" height="8" fill="#E0E0E0" stroke="#BDBDBD" strokeWidth="1" />
+                                        
+                                        {/* Wheat/Crop */}
+                                        <g transform="translate(-25, -25)">
+                                            <line x1="0" y1="0" x2="0" y2="-15" stroke="#8D6E63" strokeWidth="1.5" />
+                                            <path d="M 0,-15 C -5,-20 -2,-25 0,-22 C 2,-25 5,-20 0,-15" fill="#FFC107" />
+                                        </g>
+                                        <g transform="translate(-15, -30)">
+                                            <line x1="0" y1="0" x2="0" y2="-15" stroke="#8D6E63" strokeWidth="1.5" />
+                                            <path d="M 0,-15 C -5,-20 -2,-25 0,-22 C 2,-25 5,-20 0,-15" fill="#FFC107" />
+                                        </g>
+                                        <g transform="translate(-5, -25)">
+                                            <line x1="0" y1="0" x2="0" y2="-15" stroke="#8D6E63" strokeWidth="1.5" />
+                                            <path d="M 0,-15 C -5,-20 -2,-25 0,-22 C 2,-25 5,-20 0,-15" fill="#FFC107" />
+                                        </g>
+                                    </g>
+                                    
+                                    {/* Company Name */}
+                                    <text x="250" y="130" fontFamily="Arial, sans-serif" fontSize="42" fontWeight="bold" textAnchor="middle" fill="#004D40">Easy<tspan fill="#FF6F00">storage</tspan></text>
+                                    
+                                    {/* Tagline */}
+                                    <text x="250" y="155" fontFamily="Arial, sans-serif" fontSize="16" textAnchor="middle" fill="#616161">Connecting Farms to Markets</text>
+                                    
+                                    {/* Connection Line */}
+                                    <path d="M 220,180 C 240,160 260,190 280,170" stroke="#FF6F00" strokeWidth="4" fill="none" strokeDasharray="5,3"/>
+                                </svg>
+                            </div>
+                            
+                            <h2 className="text-2xl font-bold text-accent-500 mb-2">Welcome Back!</h2>
+                            <p className="text-gray-600 text-center max-w-xs">
+                                Sign in to access your account and manage your storage needs efficiently.
+                            </p>
+                        </div>
+                        
+                        {/* Role Selection */}
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium text-gray-700 mb-3">
+                                I am a:
+                            </label>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                                <button 
+                                    type="button"
+                                    onClick={() => handleRoleSelect('farmer')}
+                                    className={`role-button p-4 rounded-lg border flex flex-col items-center ${
+                                        selectedRole === 'farmer' 
+                                            ? 'border-secondary-500 shadow-md bg-secondary-50' 
+                                            : 'border-gray-200 hover:border-secondary-200'
+                                    }`}
+                                >
+                                    <div className="w-12 h-12 flex items-center justify-center text-secondary-600 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+                                          <path d="M19.5 6h-15v9h15V6z" />
+                                          <path fillRule="evenodd" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375zm0 13.5c-1.036 0-1.875.84-1.875 1.875v.75c0 1.035.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75c0-1.036-.84-1.875-1.875-1.875H3.375z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-medium text-gray-800">Farmer</span>
+                                </button>
+                                
+                                <button 
+                                    type="button"
+                                    onClick={() => handleRoleSelect('warehouse')}
+                                    className={`role-button p-4 rounded-lg border flex flex-col items-center ${
+                                        selectedRole === 'warehouse' 
+                                            ? 'border-primary-500 shadow-md bg-primary-50' 
+                                            : 'border-gray-200 hover:border-primary-200'
+                                    }`}
+                                >
+                                    <div className="w-12 h-12 flex items-center justify-center text-primary-600 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+                                          <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                                          <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-medium text-gray-800">Warehouse Owner</span>
+                                </button>
+                            </div>
+                            
+                            {errors.role && (
+                                <p className="mt-2 text-sm text-red-600 text-center">{errors.role}</p>
+                            )}
+                        </div>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
+                                    Email Address
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                                            errors.email ? 'border-red-500' : 'border-gray-300'
+                                        }`}
+                                        placeholder="your@email.com"
+                                    />
+                                </div>
+                                {errors.email && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                                )}
+                            </div>
+                            
+                            <div>
+                                <div className="flex items-center justify-between">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">
+                                        Password
+                                    </label>
+                                    <a href="forgot-password.html" className="text-sm text-primary-600 hover:text-primary-800 font-medium">
+                                        Forgot password?
+                                    </a>
+                                </div>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
+                                        className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                                            errors.password ? 'border-red-500' : 'border-gray-300'
+                                        }`}
+                                        placeholder="••••••••"
+                                    />
+                                </div>
+                                {errors.password && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                                )}
+                            </div>
+                            
+                            <div className="flex items-center">
+                                <input
+                                    id="remember-me"
+                                    name="remember-me"
+                                    type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={() => setRememberMe(!rememberMe)}
+                                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                                />
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                                    Remember me
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <button
+                                    type="submit"
+                                    className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-2.5 px-4 rounded-lg hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors shadow-md"
+                                >
+                                    Sign In
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div className="mt-8 text-center">
+                            <div className="relative py-2">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-gray-300"></div>
+                                </div>
+                                <div className="relative flex justify-center">
+                                    <span className="bg-white px-4 text-sm text-gray-500">New to EasyStorage?</span>
+                                </div>
+                            </div>
+                            
+                            <a 
+                                href="signup-form.html" 
+                                className="mt-3 inline-block w-full py-2.5 px-4 border border-primary-600 text-primary-600 font-medium rounded-lg hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+                            >
+                                Create New Account
+                            </a>
+                        </div>
+                        
+                        <div className="mt-8 text-center text-sm text-gray-500">
+                            <p>Streamline your farm storage and logistics with EasyStorage, trusted by over 2,000 farms worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LoginPage />);
+    </script>
+</body>
+</html> 

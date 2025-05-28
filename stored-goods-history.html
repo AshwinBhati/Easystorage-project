@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStorage - Stored Goods History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            500: '#FF6F00',
+                            600: '#F57C00',
+                            700: '#E65100',
+                        },
+                        accent: {
+                            500: '#004D40',
+                            600: '#00695C',
+                        },
+                        pink: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .history-card {
+            transition: all 0.3s ease;
+        }
+        
+        .history-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="dashboard.html" class="text-gray-700 focus:outline-none flex items-center">
+                    <i class="fas fa-arrow-left text-xl mr-2"></i>
+                    <span class="text-gray-700 hidden sm:inline">Back</span>
+                </a>
+                
+                <h1 class="text-xl font-semibold text-gray-800">Your Storage History</h1>
+                
+                <button class="text-gray-700 focus:outline-none relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <!-- Search Bar -->
+            <div class="mb-6">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        placeholder="Search your goods" 
+                        class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                    >
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- History Section -->
+            <div class="mb-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold text-gray-800">History</h2>
+                <div class="flex space-x-2">
+                    <button class="py-1 px-3 text-sm font-medium bg-white border border-gray-200 rounded-full">All</button>
+                    <button class="py-1 px-3 text-sm font-medium bg-pink-100 text-pink-500 border border-pink-200 rounded-full">Fruits</button>
+                    <button class="py-1 px-3 text-sm font-medium bg-white border border-gray-200 rounded-full">Vegetables</button>
+                </div>
+            </div>
+            
+            <!-- History Cards -->
+            <div class="space-y-4 mb-12">
+                <!-- History Card 1 -->
+                <div class="history-card bg-pink-100 rounded-xl p-5 border border-pink-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="inline-block px-2 py-1 text-xs font-medium bg-pink-200 text-pink-800 rounded-full mb-2">Fruits</span>
+                            <h3 class="text-lg font-semibold text-gray-800">1000 Kg F1 Apple</h3>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-start mb-1">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <span class="text-gray-800">Cold Storage Warehouse #1</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <span>📞</span>
+                            </div>
+                            <span class="text-gray-600">123456789</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-2 border-t border-pink-200">
+                        <div class="flex items-center">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">Stored on: May 10, 2023</span>
+                        </div>
+                        <button class="bg-white text-primary-600 hover:bg-primary-50 border border-primary-200 font-medium py-1.5 px-3 rounded-lg text-sm flex items-center">
+                            <i class="fas fa-box mr-1.5"></i>
+                            <span>Retrieve</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- History Card 2 -->
+                <div class="history-card bg-pink-100 rounded-xl p-5 border border-pink-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="inline-block px-2 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full mb-2">Vegetables</span>
+                            <h3 class="text-lg font-semibold text-gray-800">2000 Kg V2 Potato</h3>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-start mb-1">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <span class="text-gray-800">Cold Storage Warehouse #2</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <span>📞</span>
+                            </div>
+                            <span class="text-gray-600">123456789</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-2 border-t border-pink-200">
+                        <div class="flex items-center">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">Stored on: June 5, 2023</span>
+                        </div>
+                        <button class="bg-white text-primary-600 hover:bg-primary-50 border border-primary-200 font-medium py-1.5 px-3 rounded-lg text-sm flex items-center">
+                            <i class="fas fa-box mr-1.5"></i>
+                            <span>Retrieve</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- History Card 3 -->
+                <div class="history-card bg-pink-100 rounded-xl p-5 border border-pink-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="inline-block px-2 py-1 text-xs font-medium bg-pink-200 text-pink-800 rounded-full mb-2">Fruits</span>
+                            <h3 class="text-lg font-semibold text-gray-800">800 Kg F3 Lemon</h3>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-start mb-1">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <span class="text-gray-800">Premium Produce Storage</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <span>📞</span>
+                            </div>
+                            <span class="text-gray-600">209-555-4321</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-2 border-t border-pink-200">
+                        <div class="flex items-center">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">Stored on: July 12, 2023</span>
+                        </div>
+                        <button class="bg-white text-primary-600 hover:bg-primary-50 border border-primary-200 font-medium py-1.5 px-3 rounded-lg text-sm flex items-center">
+                            <i class="fas fa-box mr-1.5"></i>
+                            <span>Retrieve</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- History Card 4 -->
+                <div class="history-card bg-pink-100 rounded-xl p-5 border border-pink-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="inline-block px-2 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full mb-2">Vegetables</span>
+                            <h3 class="text-lg font-semibold text-gray-800">1500 Kg V3 Broccoli</h3>
+                        </div>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="flex items-start mb-1">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <span class="text-gray-800">Farmington Storage Solutions</span>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <span>📞</span>
+                            </div>
+                            <span class="text-gray-600">209-555-8765</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-2 border-t border-pink-200">
+                        <div class="flex items-center">
+                            <div class="text-gray-600 w-6 flex-shrink-0">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">Stored on: August 3, 2023</span>
+                        </div>
+                        <button class="bg-white text-primary-600 hover:bg-primary-50 border border-primary-200 font-medium py-1.5 px-3 rounded-lg text-sm flex items-center">
+                            <i class="fas fa-box mr-1.5"></i>
+                            <span>Retrieve</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // In a real app, these would be functionality for searching and filtering
+        const searchInput = document.querySelector('input[type="text"]');
+        const filterButtons = document.querySelectorAll('.py-1.px-3');
+        
+        searchInput.addEventListener('input', () => {
+            // Filter the history cards based on search input
+            console.log('Searching for:', searchInput.value);
+        });
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Reset all buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('bg-pink-100', 'text-pink-500', 'border-pink-200');
+                    btn.classList.add('bg-white', 'border-gray-200');
+                });
+                
+                // Highlight the clicked button
+                button.classList.remove('bg-white', 'border-gray-200');
+                button.classList.add('bg-pink-100', 'text-pink-500', 'border-pink-200');
+                
+                // Filter the history cards based on category
+                console.log('Filtering by:', button.textContent.trim());
+            });
+        });
+    </script>
+</body>
+</html> 
